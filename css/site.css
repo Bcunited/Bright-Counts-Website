@@ -1,0 +1,309 @@
+/* Brand tokens live here once. Never hard-code these hex values in a page. */
+:root {
+  --navy: #042542;
+  --navy-soft: #0a3358;
+  --gold: #d1a54b;
+  --blue: #114b83;
+  --cyan: #21adbf;
+  --white: #ffffff;
+  --mist: #f4f7fa;
+  --ink: #0f2438;
+  --ink-soft: #46586b;
+  --line: #dbe3ea;
+
+  --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --radius: 14px;
+  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+  --max: 1120px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--white);
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 { font-family: var(--serif); line-height: 1.15; margin: 0 0 0.6em; font-weight: 700; color: var(--navy); }
+h1 { font-size: clamp(2.5rem, 6vw, 4rem); letter-spacing: -0.01em; }
+h2 { font-size: clamp(1.75rem, 3.6vw, 2.5rem); }
+h3, .h3 { font-size: 1.3rem; }
+p { margin: 0 0 1em; }
+
+a { color: var(--blue); text-underline-offset: 3px; }
+a:hover { color: var(--navy); }
+
+:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; border-radius: 4px; }
+.site-header :focus-visible, .section--navy :focus-visible, .hero :focus-visible, .site-footer :focus-visible { outline-color: var(--cyan); }
+
+.skip-link {
+  position: absolute; left: -999px; top: 0.5rem;
+  background: var(--gold); color: var(--navy); padding: 0.6rem 1rem; z-index: 100; font-weight: 600;
+}
+.skip-link:focus { left: 0.5rem; }
+
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+.section { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+.section--mist { background: var(--mist); }
+.section--navy { background: var(--navy); color: var(--white); }
+.section--navy h2, .section--navy h3 { color: var(--white); }
+.section-head { max-width: 40rem; margin-bottom: 2.5rem; }
+.eyebrow {
+  display: inline-block; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--blue); margin-bottom: 0.8rem;
+}
+.section--navy .eyebrow, .hero .eyebrow { color: var(--gold); }
+.lede { font-size: 1.2rem; color: var(--ink-soft); }
+
+/* Buttons. Each variant sets four colors; the hover fill grows from the middle while the arrow slides across. */
+.btn {
+  --btn-bg: transparent; --btn-fg: var(--navy); --btn-ring: currentColor; --btn-fill: var(--navy); --btn-fg-hover: var(--white);
+  position: relative; display: inline-flex; align-items: center; justify-content: center; overflow: hidden;
+  padding: 0.85rem 2.2rem; border-radius: 100px; font-weight: 600; text-decoration: none; line-height: 1.2; text-align: center;
+  background: var(--btn-bg); color: var(--btn-fg); border: 2px solid var(--btn-ring);
+  transition: color 0.6s cubic-bezier(0.23, 1, 0.32, 1), border-radius 0.6s cubic-bezier(0.23, 1, 0.32, 1), scale 0.2s ease;
+}
+.btn-text { position: relative; z-index: 1; transform: translateX(-0.5rem); transition: transform 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+.btn-arr {
+  position: absolute; top: 50%; width: 1.4rem; height: 1.4rem; margin-top: -0.7rem; fill: currentColor; z-index: 2;
+  transition: left 0.8s cubic-bezier(0.23, 1, 0.32, 1), right 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.btn-arr--out { right: 1rem; }
+.btn-arr--in { left: -25%; }
+.btn-circle {
+  position: absolute; top: 50%; left: 50%; width: 1.25rem; height: 1.25rem; border-radius: 50%; opacity: 0;
+  background: var(--btn-fill); transform: translate(-50%, -50%);
+  transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1), height 0.8s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+.btn:hover, .btn:focus-visible { color: var(--btn-fg-hover); border-radius: 12px; }
+.btn:hover .btn-text, .btn:focus-visible .btn-text { transform: translateX(0.5rem); }
+.btn:hover .btn-arr--out, .btn:focus-visible .btn-arr--out { right: -25%; }
+.btn:hover .btn-arr--in, .btn:focus-visible .btn-arr--in { left: 1rem; }
+.btn:hover .btn-circle, .btn:focus-visible .btn-circle { width: 20rem; height: 20rem; opacity: 1; }
+.btn:active { scale: 0.96; }
+.btn--gold { --btn-bg: var(--gold); --btn-ring: var(--gold); --btn-fg: var(--navy); --btn-fill: var(--white); --btn-fg-hover: var(--navy); }
+.btn--outline { --btn-ring: var(--white); --btn-fg: var(--white); --btn-fill: var(--white); --btn-fg-hover: var(--navy); }
+.btn--navy { --btn-bg: var(--navy); --btn-ring: var(--navy); --btn-fg: var(--white); --btn-fill: var(--gold); --btn-fg-hover: var(--navy); }
+.btn--ghost { --btn-ring: var(--navy); --btn-fg: var(--navy); --btn-fill: var(--navy); --btn-fg-hover: var(--white); }
+.btn-row { display: flex; flex-wrap: wrap; gap: 0.9rem; }
+
+/* Header */
+.site-header { background: var(--navy); position: sticky; top: 0; z-index: 50; }
+.header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 4.5rem; }
+.brand { display: flex; align-items: center; gap: 0.7rem; text-decoration: none; color: var(--white); }
+.brand img { width: 2.4rem; height: auto; }
+.brand-name { font-family: var(--serif); font-size: 1.3rem; letter-spacing: 0.04em; }
+.nav { display: flex; align-items: center; gap: 1.6rem; }
+.nav a:not(.btn) { color: var(--white); text-decoration: none; font-size: 0.97rem; padding: 0.3rem 0; border-bottom: 2px solid transparent; }
+.nav a:not(.btn):hover, .nav a[aria-current="page"] { border-bottom-color: var(--gold); }
+.nav .btn { padding: 0.6rem 2.1rem; font-size: 0.95rem; }
+.nav-toggle {
+  display: none; background: none; border: 2px solid var(--white); color: var(--white);
+  border-radius: 8px; padding: 0.45rem 0.8rem; font: inherit; cursor: pointer;
+}
+
+@media (max-width: 880px) {
+  .js .nav-toggle { display: block; }
+  .nav { flex-wrap: wrap; justify-content: flex-end; gap: 0.5rem 1.1rem; padding: 0.5rem 0; }
+  .js .nav {
+    display: none; position: absolute; left: 0; right: 0; top: 100%;
+    flex-direction: column; align-items: flex-start; gap: 0.9rem;
+    background: var(--navy); padding: 1.25rem var(--gutter) 1.75rem;
+    border-top: 1px solid var(--navy-soft);
+  }
+  .js .nav.open { display: flex; }
+  .header-inner { flex-wrap: wrap; }
+}
+
+/* Hero */
+.hero { background: var(--navy); color: var(--white); padding: clamp(3rem, 8vw, 6rem) 0; overflow: hidden; }
+.hero-grid { display: grid; gap: 3rem; align-items: center; }
+@media (min-width: 880px) { .hero-grid { grid-template-columns: 1.15fr 0.85fr; } }
+.hero h1 { color: var(--white); }
+.hero h1 em { font-style: normal; color: var(--gold); }
+.hero .sub { font-size: clamp(1.2rem, 2.4vw, 1.5rem); color: var(--white); margin-bottom: 0.8rem; }
+.hero p { color: #cfdbe7; max-width: 34rem; }
+.hero .btn-row { margin-top: 1.8rem; }
+.hero--page { padding: clamp(3.5rem, 8vw, 5.5rem) 0; }
+.hero--page h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); max-width: 22ch; }
+.hero--page .sub { max-width: 40rem; }
+.hero-art { position: relative; max-width: 26rem; margin: 0 auto; }
+.hero-art img { border-radius: 24px; border: 3px solid var(--gold); box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35); aspect-ratio: 1; object-fit: cover; }
+.hero-art figcaption {
+  position: absolute; left: -0.5rem; bottom: 1.5rem; background: var(--white); color: var(--navy);
+  padding: 0.5rem 1rem; border-radius: 999px; font-size: 0.9rem; font-weight: 600; box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+.hero-art figcaption span { color: var(--blue); }
+
+/* Cards and grids */
+.grid-2 { display: grid; gap: 1.5rem; }
+.grid-3 { display: grid; gap: 1.5rem; }
+@media (min-width: 760px) { .grid-2 { grid-template-columns: repeat(2, 1fr); } .grid-3 { grid-template-columns: repeat(3, 1fr); } }
+.card {
+  background: var(--white); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 2rem; display: flex; flex-direction: column; transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(4, 37, 66, 0.1); }
+.card p:last-of-type { flex-grow: 1; }
+.card .more { font-weight: 600; margin-top: 0.5rem; }
+.card--accent { border-top: 4px solid var(--gold); }
+.card--rise { border-top: 4px solid var(--cyan); }
+.tag {
+  align-self: flex-start; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 0.25rem 0.7rem; border-radius: 999px; margin-bottom: 1rem;
+}
+.tag--live { background: #fbf1da; color: #6b4d0f; }
+.tag--dev { background: #e1f4f7; color: #0b5560; }
+
+/* Phases */
+.phase { position: relative; padding-top: 3.2rem; }
+.phase-num {
+  position: absolute; top: 0; left: 0; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+  background: var(--gold); color: var(--navy); font-family: var(--serif); font-weight: 700; font-size: 1.2rem;
+  display: grid; place-items: center;
+}
+@media (min-width: 760px) {
+  .phase:not(:last-child)::after {
+    content: ""; position: absolute; top: 1.3rem; left: 3.4rem; right: -1rem; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--gold) 0 8px, transparent 8px 16px);
+  }
+}
+
+/* Why */
+.why-item { border-left: 3px solid var(--cyan); padding-left: 1.2rem; }
+.why-item h3 { font-size: 1.2rem; margin-bottom: 0.3em; }
+.why-item p { color: var(--ink-soft); margin: 0; }
+.why-grid { display: grid; gap: 2rem; }
+@media (min-width: 760px) { .why-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* Impact */
+.stat { border-top: 3px solid var(--gold); padding-top: 1.8rem; }
+.stat-value {
+  /* Georgia's figures sit below the baseline (the 4 and 6 drop), so the stat uses a serif with lining figures. */
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Cambria, var(--serif); line-height: 1.05; margin-bottom: 1rem;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2em 0.5em;
+  font-size: clamp(2.25rem, 7vw, 3.9rem);
+}
+.stat-from { color: #8aa0b6; }
+.stat-arrow { color: var(--gold); }
+.stat-to { color: var(--gold); font-weight: 700; }
+.stat p { color: #cfdbe7; margin: 0; font-size: 1.25rem; }
+.fine { font-size: 0.9rem; color: #b6c7d8; margin-top: 2rem; font-style: italic; }
+
+/* CTA */
+.cta { text-align: center; }
+.cta .section-head { margin-left: auto; margin-right: auto; }
+.cta .btn-row { justify-content: center; }
+
+/* Footer */
+.site-footer { background: var(--navy); color: #cfdbe7; padding: 3rem 0 2rem; font-size: 0.95rem; }
+.footer-grid { display: grid; gap: 2rem; }
+@media (min-width: 760px) { .footer-grid { grid-template-columns: 1.2fr 1fr 1fr; } }
+.site-footer h2 { font-family: var(--sans); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+.site-footer a { color: var(--white); }
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer li { margin-bottom: 0.4rem; }
+.legal { border-top: 1px solid var(--navy-soft); margin-top: 2rem; padding-top: 1.5rem; font-size: 0.85rem; color: #9fb3c6; }
+
+/* Stub pages */
+.stub { padding: clamp(4rem, 10vw, 7rem) 0; min-height: 50vh; }
+
+/* Reveal on scroll. Content stays visible when JS is off. */
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.js .reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, .btn-text, .btn-arr, .btn-circle, .card { transition: none; }
+  .btn:active { scale: none; }
+  .card:hover { transform: none; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* Luna runner. Hidden unless JS is on. luna.js sets luna-narrow when the header has no room at the sides. */
+.luna {
+  --lh: 48px; --lw: 62px;
+  display: none; position: absolute; left: 0; bottom: 12px; z-index: 2;
+  width: var(--lw); height: var(--lh); pointer-events: none;
+}
+.js .luna { display: block; }
+/* Clip slides with her so the snap clear of the content edge looks like walking out from behind it. */
+.luna.is-idle { transition: transform 0.3s ease, clip-path 0.3s ease; }
+.luna-sprite {
+  width: 100%; height: 100%; background-repeat: no-repeat;
+  filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+}
+.luna-sprite.is-run {
+  background-image: url("../assets/luna-run.png");
+  background-size: calc(var(--lw) * 6) var(--lh);
+  animation: luna-run 0.6s steps(6) infinite;
+}
+.luna-sprite.is-sit {
+  background-image: url("../assets/luna-sit-1.png");
+  background-size: contain; background-position: center bottom;
+  animation: luna-wag 1.2s steps(1) infinite;
+}
+@keyframes luna-run { to { background-position-x: calc(var(--lw) * -6); } }
+@keyframes luna-wag { 50% { background-image: url("../assets/luna-sit-2.png"); } }
+
+.luna-ribbon { display: none; }
+.luna-narrow .luna { --lh: 34px; --lw: 44px; bottom: 5px; }
+.luna-narrow .luna-ribbon {
+  display: block; position: relative; height: 42px; border-top: 1px solid var(--navy-soft);
+}
+.luna-fill { position: absolute; left: 0; bottom: 0; height: 2px; width: 0; background: var(--gold); }
+
+@media (prefers-reduced-motion: reduce) {
+  .luna-sprite.is-run, .luna-sprite.is-sit { animation: none; }
+  .luna.is-idle { transition: none; }
+}
+
+/* Rise page: cyan from Luna's bandana is the accent here, gold on Business Solutions. */
+.notice-band { background: #e1f4f7; border-bottom: 1px solid #c3e6ec; }
+.notice { margin: 0; padding: 1.1rem 0; color: #0b5560; border-left: 4px solid var(--cyan); padding-left: 1rem; }
+.hero--page .tag { margin-right: 0.6rem; margin-bottom: 1rem; }
+.page-rise .hero .eyebrow { color: var(--cyan); }
+.page-rise .phase-num { background: var(--cyan); }
+.page-rise .phase:not(:last-child)::after {
+  background: repeating-linear-gradient(90deg, var(--cyan) 0 8px, transparent 8px 16px);
+}
+.hero--page .hero-art { max-width: 22rem; }
+
+/* About: owner and Luna side by side. The owner art is only 297 px wide, so it is never scaled up. */
+.people { align-items: start; gap: 3rem 1.5rem; }
+.person { margin: 0; text-align: center; }
+.person .eyebrow { display: block; }
+.person img { margin: 0 auto 1.2rem; height: auto; }
+.person--owner img { width: 320px; border-radius: 16px; border: 3px solid var(--gold); }
+.person img[src*="luna-about"] { width: 260px; }
+.person figcaption { max-width: 28rem; margin: 0 auto; color: var(--ink-soft); }
+.person--owner figcaption { color: var(--ink); }
+.card .btn { align-self: flex-start; margin-top: 0.5rem; }
+
+/* Hover on a navy background must not fall back to the global navy link color, or the text disappears. */
+.brand:hover, .site-footer a:hover { color: var(--gold); }
+
+/* Home buttons: softer champagne fill instead of stark white, gold glow on the primary, wider tracking. Scoped to main so the shared header button stays identical on every page. */
+.page-home main .btn { letter-spacing: 0.02em; }
+.page-home main .btn--gold { --btn-fill: #f3e3b8; box-shadow: 0 10px 28px rgba(209, 165, 75, 0.28); }
+.page-home main .btn--outline { --btn-ring: rgba(255, 255, 255, 0.55); --btn-fill: var(--gold); --btn-fg-hover: var(--navy); }
+.page-home main .btn--outline:hover, .page-home main .btn--outline:focus-visible { border-color: var(--gold); }
+.page-home main .btn--ghost { --btn-ring: rgba(4, 37, 66, 0.5); }
+.page-home main .btn--ghost:hover, .page-home main .btn--ghost:focus-visible { border-color: var(--navy); }
+
+.card-list { margin: 0.8rem 0 0; padding-left: 1.1rem; color: var(--ink-soft); }
+.card-list li { margin-bottom: 0.6rem; }
+.card-list strong { color: var(--ink); }
+.card p:has(+ .card-list) { flex-grow: 0; }
+.cards-note { margin: 1.8rem 0 0; color: var(--ink-soft); }

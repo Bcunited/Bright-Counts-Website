@@ -1,0 +1,35 @@
+# Secrets and local config (none exist today; kept out in case they appear)
+.env
+.env.*
+*.pem
+*.key
+*credentials*
+
+# Dependencies and build output (the site has neither)
+node_modules/
+dist/
+build/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.obsidian/
+.claude/
+
+# Original source images in the project root. The site uses the optimized copies in assets/.
+# tools/make-luna.ps1 reads these locally to rebuild the sprites.
+/*.png
+/*.PNG
+/*.jpg
+/*.JPG
+/*.jpeg
+/*.svg
+
+# Internal research and archived docs from an unrelated project
+/deep-research-report*.md
+docs/_workbench/
+
+# Internal project notes stay local because the repository is public
+docs/
+CLAUDE.md
